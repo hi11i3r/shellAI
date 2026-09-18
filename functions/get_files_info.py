@@ -1,0 +1,39 @@
+import os
+
+class File:
+
+    def __init__(self, name:str, size, isDir):
+        self.name: str = name
+        self.size: int = size
+        self.isDir: bool = isDir
+
+def get_files_info(working_directory: str, directory: str) -> str | None:
+
+    try:
+        bort = os.path.abspath(working_directory)
+        #flort = os.path.abspath(directory)
+        borf = os.path.join(bort, directory)
+        frob = os.path.normpath(borf)
+        dirok = os.path.commonpath([bort, frob]) == bort
+        if dirok == False:
+            return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
+        if os.path.isdir(frob) == False:
+            return f'Error: "{directory}" is not a directory'
+        else:
+            print(f'Success: "{directory}" is within the working directory')
+    except:
+        return f'Error: Got lost looking for "{directory}"'
+
+    dirList = os.listdir(frob)
+    filList: list[File] = []
+    for file in dirList:
+        ffile = os.path.join(frob, file)
+        freek = os.stat(ffile)
+        #print(freek.st_size)
+        filList.append(File(file, freek.st_size, os.path.isdir(ffile)))
+
+    retString: str = ""
+    for doink in filList:
+        retString += f'- {doink.name}: file_size={doink.size}, is_dir={doink.isDir}\n'
+    return retString
+    
