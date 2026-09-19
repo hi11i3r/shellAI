@@ -24,13 +24,16 @@ def get_files_info(working_directory: str, directory: str) -> str | None:
     except:
         return f'Error: Got lost looking for "{directory}"'
 
-    dirList = os.listdir(frob)
-    filList: list[File] = []
-    for file in dirList:
-        ffile = os.path.join(frob, file)
-        freek = os.stat(ffile)
-        #print(freek.st_size)
-        filList.append(File(file, freek.st_size, os.path.isdir(ffile)))
+    try:
+        dirList = os.listdir(frob)
+        filList: list[File] = []
+        for file in dirList:
+            ffile = os.path.normpath(os.path.join(frob, file))
+            freek = os.stat(ffile)
+            #print(freek.st_size)
+            filList.append(File(file, freek.st_size, os.path.isdir(ffile)))
+    except:
+        return f'Error: Not reading "{directory}"'
 
     retString: str = ""
     for doink in filList:
