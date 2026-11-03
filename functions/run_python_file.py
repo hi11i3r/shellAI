@@ -6,6 +6,28 @@ import subprocess
 
 from config import RUN_CMD
 
+schema_run_python_file = {
+    "type": "function",
+    "function": {
+        "name": "run_python_file",
+        "description": "Executes a python file in a specified directory relative to the working directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "python_file": {
+                    "type": "string",
+                    "description": "Python file name too execute, including relative path"
+                },
+                "arguments": {
+                    "type": "string",
+                    "description": "All arguments, if any, to pass to the python executable"
+                }
+                
+            },
+        },
+    },
+}
+
 def run_python_file(
     working_directory: str, file_path: str, args: list[str] | None = None
 ) -> str | None:
@@ -37,7 +59,7 @@ def run_python_file(
         #elapsed = halt - go
         #print(elapsed)
     except:
-        return f'Error: something wen wrong with {command}'
+        return f'Error: something wen wrong with {command}' # type: ignore
     retStr = ""
     if result.returncode != 0:
         retStr += f'"Process exited with code {result.returncode}"\n'

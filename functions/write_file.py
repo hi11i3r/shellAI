@@ -2,6 +2,27 @@
 
 import os
 
+schema_write_file = {
+    "type": "function",
+    "function": {
+        "name": "write_file",
+        "description": "Writes to a file in a specified directory relative to the working directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "description": "Name of the file to write including relative path"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "Content to be written"
+                }
+            },
+        },
+    },
+}
+
 def write_file(working_directory: str, file_path: str, content: str) -> str | None:
     try:
         bort = os.path.abspath(working_directory)

@@ -2,6 +2,23 @@
 import os
 from config import MAX_CHARS
 
+schema_get_file_content = {
+    "type": "function",
+    "function": {
+        "name": "get_file_content",
+        "description": "Reads the contents of a file in a specified directory relative to the working directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "description": "The name of the file to be read including relative directory"
+                }
+            },
+        },
+    },
+}
+
 def get_file_content(working_directory: str, file_path: str) -> str | None:
 
     try:
