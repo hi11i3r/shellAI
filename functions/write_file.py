@@ -35,7 +35,7 @@ def write_file(working_directory: str, file: str, content: str) -> str | None:
         if os.path.isdir(frob) == True:
             return f'Error: Cannot write to "{file}" as it is a directory.'
         else:
-            print(f'Authourised WRITE access to "{file}"')
+            print(f'Authorised WRITE access to "{file}"')
     except:
         return f'Error: Got lost looking for "{file}"'
 

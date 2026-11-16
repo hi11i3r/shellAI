@@ -32,7 +32,7 @@ def get_file_content(working_directory: str, file_path: str) -> str | None:
         if os.path.isdir(frob) == True:
             return f'Error: Is not a regular file: "{file_path}"'
         else:
-            print(f'Authourised READ access to "{file_path}"')
+            print(f'Authorised READ access to "{file_path}"')
     except:
         return f'Error: Got lost looking for "{file_path}"'
 
