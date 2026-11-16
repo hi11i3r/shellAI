@@ -39,7 +39,7 @@ def get_files_info(working_directory: str, directory: str) -> str | None:
         if os.path.isdir(frob) == False:
             return f'Error: "{directory}" is not a directory'
         else:
-            print(f'Success: "{directory}" is within the working directory')
+            print(f'Authourised for listing of "{directory}"')
     except:
         return f'Error: Got lost looking for "{directory}"'
 

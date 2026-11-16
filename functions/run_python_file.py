@@ -29,29 +29,29 @@ schema_run_python_file = {
 }
 
 def run_python_file(
-    working_directory: str, file_path: str, args: list[str] | None = None
+    working_directory: str, python_file: str, arguments: list[str] | None = None
 ) -> str | None:
     try:
         bort = os.path.abspath(working_directory)
-        #fort = os.path.abspath(file_path)
-        borf = os.path.join(bort, file_path)
+        #fort = os.path.abspath(python_file)
+        borf = os.path.join(bort, python_file)
         frob = os.path.normpath(borf)
         dirok = os.path.commonpath([bort, frob]) == bort
         if dirok == False:
-            return f'Error: Cannot execute "{file_path}" as it is outside the permitted working directory.'
+            return f'Error: Cannot execute "{python_file}" as it is outside the permitted working directory.'
         if os.path.isfile(frob) == False:
-            return f'Error: Cannot execute "{file_path}" does not exist or is not a regular file.'
-        if file_path[-3:] != ".py":
-            return f'Error: "{file_path}" is not a Python file'
+            return f'Error: Cannot execute "{python_file}" does not exist or is not a regular file.'
+        if python_file[-3:] != ".py":
+            return f'Error: "{python_file}" is not a Python file'
         else:
-            print(f'Success: "{file_path}" is within the working directory.')
+            print(f'Success: "{python_file}" is within the working directory.')
     except:
-        return f'Error: Got lost looking for "{file_path}"'
+        return f'Error: Got lost looking for "{python_file}"'
     
     try:
         command: list[str] = [RUN_CMD, frob]  
-        if args:
-            command.extend(args)
+        if arguments:
+            command.extend(arguments)
         #subprocess.run(*command)
         #go = time.time()
         result = subprocess.run([*command], capture_output=True, text=True, timeout=30)

@@ -10,7 +10,7 @@ schema_get_file_content = {
         "parameters": {
             "type": "object",
             "properties": {
-                "file": {
+                "file_path": {
                     "type": "string",
                     "description": "The name of the file to be read including relative directory"
                 }
@@ -32,7 +32,7 @@ def get_file_content(working_directory: str, file_path: str) -> str | None:
         if os.path.isdir(frob) == True:
             return f'Error: Is not a regular file: "{file_path}"'
         else:
-            print(f'Success: "{file_path}" is within the working directory.')
+            print(f'Authourised READ access to "{file_path}"')
     except:
         return f'Error: Got lost looking for "{file_path}"'
 

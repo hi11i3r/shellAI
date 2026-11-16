@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from openai import OpenAI
 #from ollama_python import chat
-from call_function import available_functions
+from call_function import available_functions, call_function
 
 def main():
     parser = argparse.ArgumentParser(description="Chatbot")
@@ -71,7 +71,17 @@ def main():
     if massage.tool_calls:
         for tool_call in massage.tool_calls:
             function_args = json.loads(tool_call.function.arguments or "{}")
-            print(f"Calling function: {tool_call.function.name}({function_args})")
+            if args.verbose:
+                print(f"Requesting function: {tool_call.function.name}({function_args})")
+            else:
+                print(f"Requesting {tool_call.function.name}...")
+            res_msg = call_function(tool_call, args.verbose)
+            if res_msg == None or res_msg['content'] == "":
+                raise Exception("No response from tool call")
+            if args.verbose:
+                print(f"-> {res_msg['content']}")
+            
+
    
    #     for tool_call in massage.tool_calls:
    #         function_args = json.loads(massage.content or "{}") #type: ignore
